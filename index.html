@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Японские дизайнеры</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+        
+        :root {
+            --black: #050505;
+            --white: #ffffff;
+            --gray: #666666;
+            --light-gray: #999999;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 4rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.5;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--black);
+        }
+        
+        .hero-bg-text {
+            position: absolute;
+            font-size: 25vw;
+            font-weight: 900;
+            opacity: 0.03;
+            z-index: 0;
+            letter-spacing: -0.05em;
+            user-select: none;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 0.8em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            opacity: 0;
+            font-weight: 300;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-title span {
+            display: block;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        
+        .hero-desc {
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            line-height: 1.8;
+        }
+        
+        .scroll-line {
+            position: absolute;
+            bottom: 4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            overflow: hidden;
+        }
+        
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: var(--white);
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(200%); }
+        }
+        
+        /* Intro Section */
+        .intro {
+            padding: 12rem 4rem;
+            background: var(--black);
+            border-top: 1px solid #222;
+        }
+        
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .intro-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+        
+        .intro-text {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+        
+        .intro-text strong {
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        /* Designer Detail Section */
+        .designer-detail {
+            padding: 8rem 4rem;
+            border-top: 1px solid #222;
+            position: relative;
+        }
+        
+        .designer-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: start;
+        }
+        
+        .designer-meta {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .designer-years {
+            font-size: 0.9rem;
+            color: var(--gray);
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .designer-name-main {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+        }
+        
+        .designer-brand-tag {
+            display: inline-block;
+            border: 1px solid #444;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+        
+        .designer-image-large {
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .designer-image-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1);
+        }
+        
+        .designer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .designer-bio {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #bbb;
+        }
+        
+        .designer-bio p {
+            margin-bottom: 2rem;
+        }
+        
+        .designer-bio p:first-child::first-letter {
+            font-size: 5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            font-weight: 900;
+            color: var(--white);
+        }
+        
+        .designer-facts {
+            border-left: 1px solid #333;
+            padding-left: 3rem;
+        }
+        
+        .fact-item {
+            margin-bottom: 3rem;
+        }
+        
+        .fact-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .fact-value {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1.4;
+        }
+        
+        .quote {
+            margin-top: 4rem;
+            padding: 3rem;
+            border: 1px solid #333;
+            position: relative;
+        }
+        
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: -2rem;
+            left: 2rem;
+            font-size: 8rem;
+            color: #333;
+            font-weight: 900;
+            line-height: 1;
+        }
+        
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-author {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Timeline */
+        .timeline {
+            padding: 6rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid #222;
+        }
+        
+        .timeline-title {
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid #222;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            background: rgba(255,255,255,0.02);
+            padding-left: 2rem;
+            margin-left: -2rem;
+        }
+        
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .timeline-event {
+            font-size: 1.1rem;
+            color: #aaa;
+        }
+        
+        /* Philosophy Section */
+        .philosophy {
+            padding: 15rem 4rem;
+            background: var(--white);
+            color: var(--black);
+            position: relative;
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .philosophy-text {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.5;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+        }
+        
+        .philosophy-text strong {
+            font-weight: 900;
+            display: block;
+            margin: 2rem 0;
+            font-size: 1.2em;
+        }
+        
+        .concepts-list {
+            list-style: none;
+            margin-top: 4rem;
+        }
+        
+        .concepts-list li {
+            font-size: 1.2rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .concepts-list li:hover {
+            padding-left: 20px;
+            background: rgba(0,0,0,0.03);
+        }
+        
+        .concept-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            opacity: 0.3;
+            font-size: 0.9rem;
+        }
+        
+        /* Archive Section */
+        .archive {
+            padding: 10rem 4rem;
+            background: var(--black);
+        }
+        
+        .archive-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        
+        .archive-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .archive-subtitle {
+            color: var(--gray);
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .archive-grid {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .archive-item {
+            flex: 0 0 30vw;
+            min-width: 400px;
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: center;
+            filter: grayscale(100%);
+            transition: filter 0.6s ease;
+        }
+        
+        .archive-item:hover {
+            filter: grayscale(0%);
+        }
+        
+        .archive-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .archive-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .archive-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 3rem 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+        }
+        
+        .archive-season {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .archive-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .archive-desc {
+            font-size: 0.9rem;
+            color: #999;
+            line-height: 1.4;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 8rem 4rem 3rem;
+            background: #000;
+            border-top: 1px solid #222;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 6rem;
+            margin-bottom: 8rem;
+        }
+        
+        .footer-main {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+        }
+        
+        .footer-text {
+            margin-top: 3rem;
+            font-size: 1rem;
+            color: var(--gray);
+            line-height: 1.8;
+            max-width: 400px;
+        }
+        
+        .footer-credits {
+            margin-top: 3rem;
+            padding: 2rem;
+            border: 1px solid #222;
+            display: inline-block;
+        }
+        
+        .footer-credits-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .footer-credits-author {
+            color: var(--white);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+        
+        .footer-col h4 {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .footer-col li strong {
+            color: var(--white);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 3rem;
+            border-top: 1px solid #222;
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .intro-grid,
+            .designer-content,
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .designer-header {
+                grid-template-columns: 1fr;
+            }
+            .designer-meta {
+                position: relative;
+                top: 0;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .archive-item {
+                min-width: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav { padding: 1.5rem; }
+            .nav-links { display: none; }
+            .designer-content { padding: 0; }
+            .designer-facts { border-left: none; padding-left: 0; border-top: 1px solid #333; padding-top: 3rem; margin-top: 3rem; }
+            .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ЧЕРНЫЙ МОДЕРН</div>
+        <ul class="nav-links">
+            <li><a href="#yamamoto">Ямамото</a></li>
+            <li><a href="#kawakubo">Кавакубо</a></li>
+            <li><a href="#miyashita">Мияшита</a></li>
+            <li><a href="#miyake">Миякэ</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg-text">東京</div>
+        <div class="hero-content">
+            <div class="hero-subtitle">Архив японского авангарда</div>
+            <h1 class="hero-title">
+                <span>ЧЕТЫРЕ</span>
+                <span>МАСТЕРА</span>
+                <span>ФОРМЫ</span>
+            </h1>
+            <p class="hero-desc">
+                История японской моды, перевернутой с ног на голову. 
+                От первого шока парижской публики в 1981 до культовых коллекций 2000-х.
+            </p>
+        </div>
+        <div class="scroll-line"></div>
+    </section>
+
+    <section class="intro">
+        <div class="intro-grid">
+            <div class="intro-label">Предисловие</div>
+            <div class="intro-text">
+                В 1981 году двое японских дизайнеров — <strong>Йоджи Ямамото</strong> и <strong>Рэй Кавакубо</strong> — 
+                шокировали Париж своими коллекциями в стиле «лохмотьев». Это был протест против 
+                европейской эстетики облегающих нарядов и ярких цветов. Черный, асимметрия, 
+                свободный крой — они предложили новый язык моды, где одежда не подчинялась телу, 
+                а создавала вокруг него пространство.
+            </div>
+        </div>
+    </section>
+
+    <!-- YOHJI YAMAMOTO -->
+    <section class="designer-detail" id="yamamoto">
+        <div class="designer-header">
+            <div class="designer-meta">
+                <div class="designer-years">1943 — настоящее время</div>
+                <h2 class="designer-name-main">Йоджи<br>Ямамото</h2>
+                <div class="designer-brand-tag">Yohji Yamamoto / Y's / Y-3</div>
+            </div>
+            <div class="designer-image-large">
+                <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1200&q=80" alt="Yohji Yamamoto Style">
+            </div>
+        </div>
+        
+        <div class="designer-content">
+            <div class="designer-bio">
+                <p>
+                    Родившийся в 1943 году в Токио, Йоджи Ямамото не собирался стать дизайнером. 
+                    После окончания юридического факультета Кейо University он провел три года в Париже, 
+                    где должен был стать адвокатом. Но в 1969 году он вернулся в Токио и открыл свой 
+                    первый бутик Y's в 1972, а в 1977 запустил одноименную линию Yohji Yamamoto.
+                </p>
+                <p>
+                    Его дебют в Париже в 1981 году стал культурным шоком. Черные, развевающиеся, 
+                    похожие на мешки наряды вызвали бурю негодования у критиков, которые назвали их 
+                    «постапокалиптическими». Но именно это и был замысел: Ямамото создавал одежду 
+                    для женщин, которые не хотели быть объектами мужского взгляда. Его философия 
+                    проста: «Черный — это modesty and arrogance (скромность и высокомерие)».
+                </p>
+                <p>
+                    В 2002 году Ямамото начал сотрудничество с Adidas, создав линию Y-3, которая 
+                    стала пионером люксового спортивного стиля. В 2009 году он пережил банкротство, 
+                    но сохранил независимость бренда, отказавшись от продажи корпорациям. 
+                    До сих пор он лично рисует каждый эскиз, работая по 16 часов в день.
+                </p>
+                
+                <div class="quote">
+                    <div class="quote-text">
+                        Я не делаю красивую одежду. Я делаю одежду, которая заставляет задуматься 
+                        о том, что такое красота.
+                    </div>
+                    <div class="quote-author">— Йоджи Ямамото, 2008</div>
+                </div>
+            </div>
+            
+            <div class="designer-facts">
+                <div class="fact-item">
+                    <span class="fact-label">Основание бренда</span>
+                    <div class="fact-value">1972 (Y's)<br>1977 (Yohji Yamamoto)</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Дебют в Париже</span>
+                    <div class="fact-value">1981 год<br>Коллекция осень-зима</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Ключевая инновация</span>
+                    <div class="fact-value">Техника «разрушения» края ткани<br>Асимметричный крой</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Влияние</span>
+                    <div class="fact-value">Рик Оуэнс, Анн Демельмейстер,<br>Мартин Маржела</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Награды</span>
+                    <div class="fact-value">Орден Почетного легиона (2011)<br>Главный приз фестиваля моды (2009)</div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-title">Хронология</div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1972</div>
+                        <div class="timeline-event">Открытие первого бутика Y's в Токио</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1981</div>
+                        <div class="timeline-event">Дебют в Париже. Шок критиков</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1984</div>
+                        <div class="timeline-event">Запуск мужской линии Yohji Yamamoto Homme</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2002</div>
+                        <div class="timeline-event">Создание Y-3 в партнерстве с Adidas</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2009</div>
+                        <div class="timeline-event">Банкротство и последующее возрождение</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REI KAWAKUBO -->
+    <section class="designer-detail" id="kawakubo" style="background: #0a0a0a;">
+        <div class="designer-header">
+            <div class="designer-meta">
+                <div class="designer-years">1942 — настоящее время</div>
+                <h2 class="designer-name-main">Рэй<br>Кавакубо</h2>
+                <div class="designer-brand-tag">Comme des Garçons</div>
+            </div>
+            <div class="designer-image-large">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&q=80" alt="Comme des Garcons Style">
+            </div>
+        </div>
+        
+        <div class="designer-content">
+            <div class="designer-bio">
+                <p>
+                    Рэй Кавакубо никогда не училась дизайну. Она окончила факультет изобразительных искусств 
+                    в Киотском университете, специализируясь на эстетике, а не на крое. В 1967 году она 
+                    начала работать стилистом в японской текстильной компании, а в 1969 создала свой 
+                    бренд Comme des Garçons (в переводе с французского «Как мальчики») в Токио.
+                </p>
+                <p>
+                    Ее дебют в Париже в 1981 году произошел одновременно с Ямамото и вызвал еще больший скандал. 
+                    Коллекция получила название «Лохмотья» (Hiroshima Chic) от испуганной парижской прессы. 
+                    Кавакубо преднамеренно оставляла дырки в ткани, использовала необработанные края и 
+                    создавала формы, которые скрывали фигуру женщины. Это была не одежда для соблазнения — 
+                    это была одежда для интеллектуального протеста.
+                </p>
+                <p>
+                    В отличие от других дизайнеров, Кавакубо никогда не рисовала традиционные эскизы. 
+                    Она работает напрямую с тканью на манекене, создавая формы методом проб и ошибок. 
+                    Ее концепция «Необычное в обычном» (Object Beautification) перевернула представление 
+                    о моде как о чем-то функциональном. Для нее одежда — это объект искусства, который 
+                    живет в пространстве между телом и окружающей средой.
+                </p>
+                
+                <div class="quote">
+                    <div class="quote-text">
+                        Я делаю одежду для женщины, которая не хочет привлекать мужское внимание своим телом. 
+                        Она привлекает внимание своим интеллектом.
+                    </div>
+                    <div class="quote-author">— Рэй Кавакубо, 1995</div>
+                </div>
+            </div>
+            
+            <div class="designer-facts">
+                <div class="fact-item">
+                    <span class="fact-label">Основание бренда</span>
+                    <div class="fact-value">1969<br>Токио, Япония</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Философия</span>
+                    <div class="fact-value">Anti-fashion<br>Объекты вместо одежды</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Ключевые линии</span>
+                    <div class="fact-value">Homme Plus, Shirt, Play, Noir,<br>Black, Junya Watanabe</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Дойл стрит</span>
+                    <div class="fact-value">Первый бутик открылся в 1975<br>в Токио</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Влияние на индустрию</span>
+                    <div class="fact-value">Создание концепции «прекрасных лохмотьев»<br>Влияние на Хусейна Чалаяна и Рика Оуэнса</div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-title">Хронология</div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1969</div>
+                        <div class="timeline-event">Основание Comme des Garçons в Токио</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1975</div>
+                        <div class="timeline-event">Открытие первого флагманского бутика</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1981</div>
+                        <div class="timeline-event">Парижский дебют. Коллекция «Лохмотья»</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1988</div>
+                        <div class="timeline-event">Запуск линии Comme des Garçons Homme Plus</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1992</div>
+                        <div class="timeline-event">Создание дочернего бренда Junya Watanabe</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2008</div>
+                        <div class="timeline-event">Запуск линии PLAY с сердечком</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAKAHIRO MIYASHITA -->
+    <section class="designer-detail" id="miyashita">
+        <div class="designer-header">
+            <div class="designer-meta">
+                <div class="designer-years">1973 — настоящее время</div>
+                <h2 class="designer-name-main">Такахиро<br>Мияшита</h2>
+                <div class="designer-brand-tag">Number (N)ine / The Soloist</div>
+            </div>
+            <div class="designer-image-large">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80" alt="Number Nine Style">
+            </div>
+        </div>
+        
+        <div class="designer-content">
+            <div class="designer-bio">
+                <p>
+                    Такахиро Мияшита — дитя японской уличной культуры 1990-х. Родившийся в 1973 году, 
+                    он не получил формального образования в дизайне, но с детства был погружен в музыку. 
+                    Название его первого бренда Number (N)ine — отсылка к песне The Beatles «Revolution 9», 
+                    что сразу определило музыкальную эстетику его работ.
+                </p>
+                <p>
+                    В 1996 году, в возрасте 23 лет, он запустил Number (N)ine в Токио. Бренд мгновенно 
+                    стал культовым среди молодежи благодаря своей способности смешивать гранж, панк и 
+                    американскую рабочую одежду с японским вниманием к деталям. Мияшита был одержим 
+                    идеей «совершенного несовершенства» — каждая вещь выглядела так, будто ее носили годами, 
+                    хотя была новой.
+                </p>
+                <p>
+                    В 2009 году, на пике успеха, он шокировал индустрию, объявив о закрытии Number (N)ine. 
+                    Причина осталась загадкой, но многие связывают это с личным кризисом и желанием 
+                    начать с чистого листа. В 2010 году он вернулся с новым брендом The Soloist, который 
+                    стал еще более авангардным и персональным — это был чистый творческий эксперимент без 
+                    коммерческих ограничений.
+                </p>
+                
+                <div class="quote">
+                    <div class="quote-text">
+                        Я создаю одежду для одиноких людей. Для тех, кто слушает музыку в наушниках и 
+                        идет по улице, создавая свой собственный фильм.
+                    </div>
+                    <div class="quote-author">— Такахиро Мияшита, 2012</div>
+                </div>
+            </div>
+            
+            <div class="designer-facts">
+                <div class="fact-item">
+                    <span class="fact-label">Основание Number (N)ine</span>
+                    <div class="fact-value">1996<br>Токио, район Харадзюку</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Закрытие бренда</span>
+                    <div class="fact-value">2009<br>Последняя коллекция «A Closed Feeling»</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Запуск The Soloist</span>
+                    <div class="fact-value">2010<br>Токио и Нью-Йорк</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Музыкальные отсылки</span>
+                    <div class="fact-value">The Beatles, Nirvana, The Smiths,<br>Neil Young, Sonic Youth</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Фирменные детали</span>
+                    <div class="fact-value">Обрезные швы, винтажные вещицы,<br>многослойность, узкие джинсы</div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-title">Хронология</div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1996</div>
+                        <div class="timeline-event">Запуск Number (N)ine в Токио</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2000</div>
+                        <div class="timeline-event">Дебют на Токийской неделе моды</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2004</div>
+                        <div class="timeline-event">Открытие первого зарубежного бутика в Нью-Йорке</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2009</div>
+                        <div class="timeline-event">Закрытие Number (N)ine после 13 лет работы</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2010</div>
+                        <div class="timeline-event">Основание The Soloist</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-event">Коллаборация с Converse и Oakley</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ISSEY MIYAKE -->
+    <section class="designer-detail" id="miyake" style="background: #0a0a0a;">
+        <div class="designer-header">
+            <div class="designer-meta">
+                <div class="designer-years">1938 — 2022</div>
+                <h2 class="designer-name-main">Иссэй<br>Миякэ</h2>
+                <div class="designer-brand-tag">Issey Miyake / Pleats Please / Bao Bao</div>
+            </div>
+            <div class="designer-image-large">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80" alt="Issey Miyake Style">
+            </div>
+        </div>
+        
+        <div class="designer-content">
+            <div class="designer-bio">
+                <p>
+                    Иссэй Миякэ родился в 1938 году в Хиросиме и пережил атомную бомбардировку в возрасте 
+                    семи лет — его мама умерла от лучевой болезни через три года после взрыва. Эта травма 
+                    определила его философию: он хотел создавать вещи, которые приносят радость и красоту 
+                    в мир, избегая элитарности традиционной моды.
+                </p>
+                <p>
+                    Он учился в Токийском университете искусств, а затем в Париже у Ги Лароша и Юбера де 
+                    Живанши. В 1970 году вернулся в Токио и основал Miyake Design Studio. Его ранние работы 
+                    уже демонстрировали интерес к инновационным тканям, но настоящий прорыв случился в 1988 году 
+                    с презентацией технологии гармент-плиссировки (garment pleating).
+                </p>
+                <p>
+                    В 1993 году он запустил линию Pleats Please — одежду из микроплиссированного полиэстера, 
+                    которую можно было скручивать в трубочку, мять и стирать, не гладя. Это была революция 
+                    функциональности. В 1998 году представил концепцию A-POC (A Piece of Cloth) — одежду, 
+                    вытканную из одной нити без швов, которую покупатель сам отрезал по нужному размеру.
+                </p>
+                <p>
+                    Миякэ ушел из моды в 1999 году, передав креативное руководство своим ученикам, но 
+                    продолжал руководить технологическими исследованиями до своей смерти в 2022 году от 
+                    рака печени.
+                </p>
+                
+                <div class="quote">
+                    <div class="quote-text">
+                        Дизайн — это не для философии, а для жизни. Я хочу создавать одежду, которая 
+                        приносит радость обычным людям, а не только богатым.
+                    </div>
+                    <div class="quote-author">— Иссэй Миякэ, 2006</div>
+                </div>
+            </div>
+            
+            <div class="designer-facts">
+                <div class="fact-item">
+                    <span class="fact-label">Рождение и смерть</span>
+                    <div class="fact-value">22 апреля 1938 — 5 августа 2022<br>Хиросима, Япония — Токио</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Основание студии</span>
+                    <div class="fact-value">1970<br>Miyake Design Studio</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Революция плиссировки</span>
+                    <div class="fact-value">1988 — разработка технологии<br>1993 — запуск Pleats Please</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Концепция A-POC</span>
+                    <div class="fact-value">1998<br>Одежда из одной нити без швов</div>
+                </div>
+                
+                <div class="fact-item">
+                    <span class="fact-label">Наследие</span>
+                    <div class="fact-value">Три направления:<br>Issey Miyake, Pleats Please, Bao Bao</div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-title">Хронология</div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1970</div>
+                        <div class="timeline-event">Основание Miyake Design Studio</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1973</div>
+                        <div class="timeline-event">Дебют в Париже. Коллекция «Body Works»</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1988</div>
+                        <div class="timeline-event">Изобретение технологии гармент-плиссировки</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1993</div>
+                        <div class="timeline-event">Запуск линии Pleats Please</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1998</div>
+                        <div class="timeline-event">Презентация концепции A-POC</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1999</div>
+                        <div class="timeline-event">Уход с поста главного дизайнера, фокус на исследованиях</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2022</div>
+                        <div class="timeline-event">Смерть в Токио на 85-м году жизни</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy">
+        <div class="philosophy-grid">
+            <div>
+                <div class="section-label" style="color: #666; margin-bottom: 3rem; font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase;">Философия востока</div>
+                <p class="philosophy-text">
+                    Японская мода отказывается от западного культа тела. 
+                    <strong>Одежда — это пространство между кожей и миром.</strong>
+                    Концепция <em>ма</em> — значимая пустота. 
+                    Асимметрия как естественное состояние. 
+                    Незавершенность как высшая форма совершенства.
+                </p>
+            </div>
+            
+            <div>
+                <ul class="concepts-list">
+                    <li>
+                        <span>Wabi-sabi — красота непостоянства</span>
+                        <span class="concept-jp">侘寂</span>
+                    </li>
+                    <li>
+                        <span>Ma — сила пустоты</span>
+                        <span class="concept-jp">間</span>
+                    </li>
+                    <li>
+                        <span>Shibui — сдержанная элегантность</span>
+                        <span class="concept-jp">渋い</span>
+                    </li>
+                    <li>
+                        <span>Mono no aware — чувство вещей</span>
+                        <span class="concept-jp">物の哀れ</span>
+                    </li>
+                    <li>
+                        <span>Iki — изысканная простота</span>
+                        <span class="concept-jp">粋</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="archive">
+        <div class="archive-header">
+            <div class="section-label" style="text-align: center; margin-bottom: 2rem; display: block; color: var(--gray); font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase;">Культовые моменты</div>
+            <h2 class="archive-title">АРХИВ<br>КОЛЛЕКЦИЙ</h2>
+            <p class="archive-subtitle">
+                Поворотные точки японской моды, изменившие представление о красоте, 
+                форме и функции одежды в западной культуре.
+            </p>
+        </div>
+        
+        <div class="archive-grid">
+            <div class="archive-item">
+                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=80" alt="Yohji 1981">
+                <div class="archive-info">
+                    <div class="archive-season">Париж, 1981</div>
+                    <div class="archive-brand">Yohji Yamamoto</div>
+                    <div class="archive-desc">Дебютная коллекция «Черный как альтернатива цвету»</div>
+                </div>
+            </div>
+            
+            <div class="archive-item">
+                <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=800&q=80" alt="CDG 1982">
+                <div class="archive-info">
+                    <div class="archive-season">Париж, 1982</div>
+                    <div class="archive-brand">Comme des Garçons</div>
+                    <div class="archive-desc">«Лохмотья» — коллекция, шокировавшая публику дырами в ткани</div>
+                </div>
+            </div>
+            
+            <div class="archive-item">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80" alt="Number Nine">
+                <div class="archive-info">
+                    <div class="archive-season">Токио, 2003</div>
+                    <div class="archive-brand">Number (N)ine</div>
+                    <div class="archive-desc">«High Streets» — эталон японского гранжа и рок-культуры</div>
+                </div>
+            </div>
+            
+            <div class="archive-item">
+                <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=800&q=80" alt="Pleats Please">
+                <div class="archive-info">
+                    <div class="archive-season">1993</div>
+                    <div class="archive-brand">Issey Miyake</div>
+                    <div class="archive-desc">Запуск Pleats Please — революция функциональной моды</div>
+                </div>
+            </div>
+            
+            <div class="archive-item">
+                <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=800&q=80" alt="Y3">
+                <div class="archive-info">
+                    <div class="archive-season">2002</div>
+                    <div class="archive-brand">Y-3</div>
+                    <div class="archive-desc">Коллаборация Yamamoto и Adidas — рождение люксового спорта</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-main">
+                
+                </div>
+                <p class="footer-text">
+                  
+                </p>
+                <div class="footer-credits">
+                    <span class="footer-credits-label"></span>
+                    <span class="footer-credits-author">сделал кирилл прищепов</span>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Хронология эпох</h4>
+                <ul>
+                    <li>
+                        <strong>1981</strong>
+                        Вторжение в Париж
+                    </li>
+                    <li>
+                        <strong>1993</strong>
+                        Эра технологий
+                    </li>
+                    <li>
+                        <strong>1996</strong>
+                        Уличная революция
+                    </li>
+                    <li>
+                        <strong>2009</strong>
+                        Новый авангард
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Ключевые концепции</h4>
+                <ul>
+                    <li>Anti-fashion</li>
+                    <li>Деконструкция</li>
+                    <li>Гармент-плиссировка</li>
+                    <li>Монохромный протест</li>
+                    <li>Музыкальные субкультуры</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div>日本の前衛ファッション</div>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Hero Animation
+        const heroTl = gsap.timeline();
+        
+        heroTl
+            .to('.hero-title span', {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: 'power4.out',
+                delay: 0.3
+            })
+            .to('.hero-subtitle', {
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.out'
+            }, '-=0.8')
+            .to('.hero-desc', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out'
+            }, '-=0.5');
+        
+        // Intro text reveal
+        gsap.from('.intro-text', {
+            scrollTrigger: {
+                trigger: '.intro',
+                start: 'top 70%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1.5,
+            ease: 'power3.out'
+        });
+        
+        // Designer sections animations
+        document.querySelectorAll('.designer-detail').forEach((section) => {
+            gsap.from(section.querySelector('.designer-name-main'), {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 80,
+                opacity: 0,
+                duration: 1.2,
+                ease: 'power4.out'
+            });
+            
+            gsap.from(section.querySelector('.designer-image-large'), {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 70%',
+                    toggleActions: 'play none none reverse'
+                },
+                x: 50,
+                opacity: 0,
+                duration: 1.5,
+                ease: 'power3.out'
+            });
+            
+            gsap.from(section.querySelectorAll('.designer-bio p'), {
+                scrollTrigger: {
+                    trigger: section.querySelector('.designer-bio'),
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        });
+        
+        // Philosophy section
+        gsap.from('.philosophy-text', {
+            scrollTrigger: {
+                trigger: '.philosophy',
+                start: 'top 70%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1.5,
+            ease: 'power3.out'
+        });
+        
+        // Archive items
+        gsap.utils.toArray('.archive-item').forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'left 80%',
+                    horizontal: true,
+                    toggleActions: 'play none none reverse'
+                },
+                x: 50,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        });
+        
+        // Parallax for hero
+        gsap.to('.hero-bg-text', {
+            scrollTrigger: {
+                trigger: '.hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1
+            },
+            y: 100,
+            opacity: 0.1
+        });
+    </script>
+</body>
+</html>
